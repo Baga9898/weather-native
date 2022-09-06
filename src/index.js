@@ -1,6 +1,18 @@
 import React, {useState, useEffect} from 'react';
 import * as Location from 'expo-location';
-import { Alert, SafeAreaView, View, Text, StyleSheet, ActivityIndicator, ScrollView, RefreshControl, Image, Dimensions } from 'react-native';
+import { 
+    Alert, 
+    SafeAreaView, 
+    View, 
+    Text, 
+    StyleSheet, 
+    ActivityIndicator, 
+    ScrollView, 
+    RefreshControl, 
+    Image, 
+    Dimensions,
+    FlatList,
+} from 'react-native';
 
 const openWeatherKey = '874d0af8e952eb0b39aa7aa85cefabf8';
 let url = `http://api.openweathermap.org/data/2.5/onecall?&units=metric&exclude=minutely&appid=${openWeatherKey}`;
@@ -105,6 +117,39 @@ const Weather = () => {
                     </Text>
                 </View>
             </View>
+
+            <View>
+                <Text style={styles.subtitle}>Hourly forecast</Text>
+            </View>
+
+            <FlatList
+                horizontal
+                data={forecast.hourly.slice(0, 24)}
+                keyExtractor={(item, index) => index.toString()}
+                renderItem={(hour) => {
+                    const weather = hour.item.weather[0];
+                    let dt = new Date(hour.item.dt * 1000);
+                    return (
+                        <View style={styles.hour}>
+                            <Text style={{fontWeight:'bold', color:'#346751'}}>
+                                {dt.toLocaleTimeString().replace(/:\d+ /, ' ')}
+                            </Text>
+                            <Text>
+                                {Math.round(hour.item.temp)}℃
+                            </Text>
+                            <Image
+                                style={styles.smallIcon}
+                                source={{
+                                    uri: `http://openweathermap.org/img/wn/${weather.icon}@4x.png`
+                                }}
+                            />
+                            <Text style={{fontWeight: 'bold', color: '#346751'}}>
+                                {weather.description}
+                            </Text>
+                        </View>
+                    );
+                }}
+            />
         </ScrollView>
     </SafeAreaView>
   )
@@ -142,7 +187,37 @@ const styles = StyleSheet.create({
         marginBottom: 5,
     },
     info: {
-        width: ,
+        width: Dimensions.get('screen').width/2.5,
+        backgroundColor: 'rgba(0,0,0,0.5)',
+        padding: 10,
+        borderRadius: 15,
+        justifyContent: 'center',
+    },
+    extraInfo: {
+        flexDirection: 'row',
+        marginTop: 20,
+        justifyContent: 'space-between',
+        padding: 10,
+    },
+    text: {
+        fontSize: 20,
+        color: '#fff',
+        textAlign: 'center',
+    },
+    subtitle: {
+        fontSize: 24,
+        marginVertical: 12,
+        marginLeft: 7,
+        color: '#c84b31',
+        fontWeight: 'bold',
+    },
+    hour: {
+        padding: 6,
+        alignItems: 'center',
+    },
+    smallIcon: {
+        with: 100,
+        height: 100,
     },
 });
 
