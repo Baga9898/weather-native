@@ -1,12 +1,10 @@
-import { StyleSheet, Text, View } from 'react-native';
-import styled from 'styled-components/native';
-
-
+import { StyleSheet, View } from 'react-native';
+import Weather from './src/index';
 
 const App = () => {
   return (
     <View style={styles.container}>
-      <Text>Hey!</Text>
+      <Weather/>
     </View>
   );
 }
@@ -14,9 +12,6 @@ const App = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });
 
