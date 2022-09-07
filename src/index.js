@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import * as Location from 'expo-location';
+import { LinearGradient } from 'expo-linear-gradient';
 import { 
     Alert, 
     SafeAreaView, 
@@ -13,7 +14,6 @@ import {
     Dimensions,
     FlatList,
 } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
 
 const openWeatherKey = '874d0af8e952eb0b39aa7aa85cefabf8';
 let url = `http://api.openweathermap.org/data/2.5/onecall?&units=metric&exclude=minutely&appid=${openWeatherKey}`;
@@ -138,10 +138,10 @@ const Weather = () => {
                         let dt = new Date(hour.item.dt * 1000);
                         return (
                             <View style={styles.hour}>
-                                <Text style={{fontWeight:'bold', color:'#346751'}}>
+                                <Text style={{fontWeight:'bold', color:'#fff'}}>
                                     {dt.toLocaleTimeString().replace(/:\d+ /, ' ')}
                                 </Text>
-                                <Text>
+                                <Text style={{color: '#fff'}}>
                                     {Math.round(hour.item.temp)}℃
                                 </Text>
                                 <Image
@@ -150,7 +150,7 @@ const Weather = () => {
                                         uri: `http://openweathermap.org/img/wn/${weather.icon}@4x.png`
                                     }}
                                 />
-                                <Text style={{fontWeight: 'bold', color: '#346751'}}>
+                                <Text style={{fontWeight: 'bold', color: '#fff'}}>
                                     {weather.description}
                                 </Text>
                             </View>
@@ -166,12 +166,11 @@ const Weather = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        // backgroundColor: '#1a6cd4',
     },
     title: {
         textAlign: 'center',
         fontSize: 20,
-        color: '#c84b31',
+        color: '#fff',
     },
     current: {
         flexDirection: 'row',
@@ -216,7 +215,7 @@ const styles = StyleSheet.create({
         fontSize: 24,
         marginVertical: 12,
         marginLeft: 7,
-        color: '#c84b31',
+        color: '#fff',
         fontWeight: 'bold',
     },
     hour: {
