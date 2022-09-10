@@ -80,93 +80,82 @@ const Weather = () => {
         end={{ x: 1, y: 1 }}
         style={{ flex: 1 }}
     >
-        <SafeAreaView style={styles.container}>
-            <ScrollView 
-                refreshControl={
-                    <RefreshControl 
-                    refreshing={refreshing} 
-                    onRefresh={() => loadForecast()} 
-                    />
-                }
-                style={{marginTop: 50}}
-            >
-                {/* <Text style={styles.title}>
-                    Current Weather
-                </Text>
-                <Text style={{alignItems: 'center', textAlign: 'center'}}>
-                    Your Location
-                </Text> */}
-                <View style={styles.current}>
+        <ScrollView 
+            refreshControl={
+                <RefreshControl 
+                refreshing={refreshing} 
+                onRefresh={() => loadForecast()} 
+                />
+            }
+            style={{marginTop: 50}}
+        >
+            <View style={styles.current}>
+                <View style={styles.currentLeft}>
                     <Text style={styles.currentTemp}>
                         {Math.round(forecast.current.temp)}°
                     </Text>
-                    {/* <Image 
-                            source={require('../assets/sunny.png')}
-                        /> */}
+                    <Text style={styles.feelsLike}>
+                        {feelsLike}
+                        {Math.round(forecast.current.feels_like)}°
+                    </Text>
+                </View>
+                <View>
                     <Image
                         style={styles.largeIcon}
                         source={require('../assets/soCold.png')}
-                        // source={{
-                        //     uri: `http://openweathermap.org/img/wn/${current.icon}@4x.png`,
-                        // }}
                     />
                 </View>
-
-                <Text style={styles.currentDescription}>
-                    {current.description}
-                </Text>
-                <Text style={styles.feelsLike}>
-                    {feelsLike}
-                    {Math.round(forecast.current.feels_like)}°
-                </Text>
-
-                {/* <View style={styles.extraInfo}>
-                    <View style={styles.info}>
-                        <Image
-                            source={require('../assets/humidity.png')}
-                            style={{width: 40, height: 40, borderRadius: 40/2, marginLeft: 50}}
-                        />
-                        <Text style={styles.text}>
-                            {forecast.current.humidity}%
-                        </Text>
-                        <Text style={styles.text}>
-                            Humidity
-                        </Text>
-                    </View>
-                </View> */}
-
-                {/* <View>
-                    <Text style={styles.subtitle}>Почасовой прогноз</Text>
-                </View> */}
-
-                <FlatList
-                    horizontal
-                    data={forecast.hourly.slice(0, 24)}
-                    keyExtractor={(item, index) => index.toString()}
-                    renderItem={(hour) => {
-                        const weather = hour.item.weather[0];
-                        let date = formatAMPM(new Date(hour.item.dt * 1000));
-                        return (
-                            <View style={styles.hour}>
-                                <Text style={{fontWeight:'bold', color:'#fff'}}>
-                                    {date}
-                                </Text>
-                                <Text style={{color: '#fff'}}>
-                                    {Math.round(hour.item.temp)}°
-                                </Text>
-                                <Image
-                                    style={styles.hourlyIcon}
-                                    source={require('../assets/sunny.png')}
-                                />
-                                {/* <Text style={{fontWeight: 'bold', color: '#fff'}}>
-                                    {weather.description}
-                                </Text> */}
-                            </View>
-                        );
-                    }}
-                />
-            </ScrollView>
-        </SafeAreaView>
+            </View>
+            {/* <Text style={styles.currentDescription}>
+                        {current.description}
+                        переменная облачная но не точно облачность
+            </Text> */}
+            {/* <View style={styles.extraInfo}>
+                <View style={styles.info}>
+                    <Image
+                        source={require('../assets/humidity.png')}
+                        style={{width: 40, height: 40, borderRadius: 40/2, marginLeft: 50}}
+                    />
+                    <Text style={styles.text}>
+                        {forecast.current.humidity}%
+                    </Text>
+                    <Text style={styles.text}>
+                        Humidity
+                    </Text>
+                </View>
+            </View> */}
+            {/* <View>
+                <Text style={styles.subtitle}>Почасовой прогноз</Text>
+            </View> */}
+            <View style={styles.devider}></View>
+            <FlatList
+                horizontal
+                data={forecast.hourly.slice(0, 24)}
+                keyExtractor={(item, index) => index.toString()}
+                renderItem={(hour) => {
+                    const weather = hour.item.weather[0];
+                    let date = formatAMPM(new Date(hour.item.dt * 1000));
+                    return (
+                        <View style={styles.hour}>
+                            <Text style={{fontWeight:'bold', color:'#fff'}}>
+                                {date}
+                            </Text>
+                            <Text style={{color: '#fff'}}>
+                                {Math.round(hour.item.temp)}°
+                            </Text>
+                            {/* <Image
+                                style={styles.hourlyIcon}
+                                source={require('../assets/sunny.png')}
+                            /> */}
+                            {/* <Text style={{fontWeight: 'bold', color: '#fff'}}>
+                                {weather.description}
+                            </Text> */}
+                        </View>
+                    );
+                }}
+            />
+            <View style={styles.devider}></View>
+        </ScrollView>
     </LinearGradient>
   )
 }
@@ -181,9 +170,10 @@ const styles = StyleSheet.create({
         color: '#fff',
     },
     current: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        alignContent: 'center',
+        flexDirection: 'row',  
+    },
+    currentLeft: {
+        paddingTop: 30,
     },
     largeIcon: {
         width: 300,
@@ -192,7 +182,6 @@ const styles = StyleSheet.create({
     currentTemp: {
         fontSize: 55,
         fontWeight: 'bold',
-        textAlign: 'center',
         color: '#fff',
         marginLeft: 30,
     },
@@ -245,6 +234,13 @@ const styles = StyleSheet.create({
     smallIcon: {
         with: 100,
         height: 100,
+    },
+    devider: {
+        width: '100%',
+        backgroundColor: 'rgba(255,255,255,0.1)',
+        height: 1,
+        marginTop: 30,
+        marginBottom: 30,
     },
 });
 
