@@ -60,12 +60,25 @@ const Weather = () => {
     const current = forecast.current.weather[0];
     const feelsLike = 'Ощущается ';
 
+    const formatAMPM = (date) => {
+        let hours = date.getHours();
+        let minutes = date.getMinutes();
+        let ampm = hours >= 12 ? 'pm' : 'am';
+        hours = hours % 12;
+        hours = hours ? hours : 12;
+        minutes = minutes.toString().padStart(2, '0');
+        let strTime = hours + ' ' + ampm;
+        return strTime;
+    }
+    
+    // console.log(formatAMPM(new Date(2022, 1, 1)));
+
   return (
     <LinearGradient
         colors={['#4681c9', '#364699']}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
-        style={{ flex:1 }}
+        style={{ flex: 1 }}
     >
         <SafeAreaView style={styles.container}>
             <ScrollView 
@@ -132,11 +145,11 @@ const Weather = () => {
                     keyExtractor={(item, index) => index.toString()}
                     renderItem={(hour) => {
                         const weather = hour.item.weather[0];
-                        let dt = new Date(hour.item.dt * 1000);
+                        let date = formatAMPM(new Date(hour.item.dt * 1000));
                         return (
                             <View style={styles.hour}>
                                 <Text style={{fontWeight:'bold', color:'#fff'}}>
-                                    {dt.toLocaleTimeString().replace(/:\d+ /, ' ')}
+                                    {date}
                                 </Text>
                                 <Text style={{color: '#fff'}}>
                                     {Math.round(hour.item.temp)}°
