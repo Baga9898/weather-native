@@ -13,6 +13,7 @@ import {
     Image, 
     Dimensions,
     FlatList,
+    TouchableOpacity,
 } from 'react-native';
 
 const openWeatherKey = '874d0af8e952eb0b39aa7aa85cefabf8';
@@ -21,6 +22,8 @@ let url = `http://api.openweathermap.org/data/2.5/onecall?&units=metric&exclude=
 const Weather = () => {
     const [forecast, setForecast] = useState(null);
     const [refreshing, setRefreshing] = useState(false);
+
+    const [clicksCount, setClicksCount] = useState(0);
 
     const loadForecast = async () => {
         setRefreshing(true);
@@ -72,6 +75,11 @@ const Weather = () => {
         return strTime;
     }
 
+    const mainIconPressHandler = () => {
+        setClicksCount(clicksCount + 1);
+        console.log(clicksCount);
+    }
+
   return (
     <LinearGradient
         colors={['#4681c9', '#364699']}
@@ -97,22 +105,23 @@ const Weather = () => {
                         {feelsLike}
                         {Math.round(forecast.current.feels_like)}°
                     </Text>
-                    <Text style={styles.feelsLike}>
+                    {/* <Text style={styles.feelsLike}>
                         {humidity}
                         {forecast.current.humidity}%
-                    </Text>
+                    </Text> */}
                 </View>
-                <View>
-                    <Image
-                        style={styles.largeIcon}
-                        source={require('../assets/soCold.png')}
-                    />
+                <View style={styles.currentRight}>
+                    <TouchableOpacity onPress={mainIconPressHandler}>
+                        <Image
+                            style={styles.largeIcon}
+                            source={require('../assets/soCold.png')}
+                        />
+                    </TouchableOpacity>
                 </View>
             </View>
-            {/* <Text style={styles.currentDescription}>
+            <Text style={styles.currentDescription}>
                         {current.description}
-                        переменная облачная но не точно облачность
-            </Text> */}
+            </Text>
             <View style={styles.devider}></View>
             <FlatList
                 horizontal
@@ -146,13 +155,18 @@ const styles = StyleSheet.create({
         color: '#fff',
     },
     current: {
-        flexDirection: 'row',  
+        flexDirection: 'row', 
+        justifyContent: 'space-between', 
+        marginBottom: 20,
     },
     currentLeft: {
         paddingTop: 30,
     },
+    currentRight: {
+        marginRight: 10,
+    },
     largeIcon: {
-        width: 300,
+        width: 170,
         height: 250,
     },
     currentTemp: {
@@ -164,10 +178,11 @@ const styles = StyleSheet.create({
     currentDescription: {
         width: '100%',
         fontWeight: '400',
-        fontSize: 24,
+        fontSize: 20,
         marginBottom: 5,
         marginLeft: 30,
         color: '#fff',
+        marginBottom: 20,
     },
     feelsLike: {
         color: '#fff',
@@ -203,6 +218,7 @@ const styles = StyleSheet.create({
         padding: 6,
         alignItems: 'center',
         marginHorizontal: 15,
+        marginVertical: 30,
     },
     hourlyTime: {
         color: 'rgba(255,255,255,0.5)',
@@ -222,7 +238,6 @@ const styles = StyleSheet.create({
         width: '100%',
         backgroundColor: 'rgba(255,255,255,0.1)',
         height: 1,
-        marginVertical: 30,
     },
 });
 
