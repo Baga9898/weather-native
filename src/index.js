@@ -59,6 +59,7 @@ const Weather = () => {
 
     const current = forecast.current.weather[0];
     const feelsLike = 'Ощущается ';
+    const humidity = 'Влажность ';
 
     const formatAMPM = (date) => {
         let hours = date.getHours();
@@ -70,8 +71,6 @@ const Weather = () => {
         let strTime = hours + ' ' + ampm;
         return strTime;
     }
-    
-    // console.log(formatAMPM(new Date(2022, 1, 1)));
 
   return (
     <LinearGradient
@@ -98,6 +97,10 @@ const Weather = () => {
                         {feelsLike}
                         {Math.round(forecast.current.feels_like)}°
                     </Text>
+                    <Text style={styles.feelsLike}>
+                        {humidity}
+                        {forecast.current.humidity}%
+                    </Text>
                 </View>
                 <View>
                     <Image
@@ -110,23 +113,6 @@ const Weather = () => {
                         {current.description}
                         переменная облачная но не точно облачность
             </Text> */}
-            {/* <View style={styles.extraInfo}>
-                <View style={styles.info}>
-                    <Image
-                        source={require('../assets/humidity.png')}
-                        style={{width: 40, height: 40, borderRadius: 40/2, marginLeft: 50}}
-                    />
-                    <Text style={styles.text}>
-                        {forecast.current.humidity}%
-                    </Text>
-                    <Text style={styles.text}>
-                        Humidity
-                    </Text>
-                </View>
-            </View> */}
-            {/* <View>
-                <Text style={styles.subtitle}>Почасовой прогноз</Text>
-            </View> */}
             <View style={styles.devider}></View>
             <FlatList
                 horizontal
@@ -137,19 +123,12 @@ const Weather = () => {
                     let date = formatAMPM(new Date(hour.item.dt * 1000));
                     return (
                         <View style={styles.hour}>
-                            <Text style={{fontWeight:'bold', color:'#fff'}}>
+                            <Text style={styles.hourlyTime}>
                                 {date}
                             </Text>
-                            <Text style={{color: '#fff'}}>
+                            <Text style={styles.hourlyTemp}>
                                 {Math.round(hour.item.temp)}°
                             </Text>
-                            {/* <Image
-                                style={styles.hourlyIcon}
-                                source={require('../assets/sunny.png')}
-                            /> */}
-                            {/* <Text style={{fontWeight: 'bold', color: '#fff'}}>
-                                {weather.description}
-                            </Text> */}
                         </View>
                     );
                 }}
@@ -161,9 +140,6 @@ const Weather = () => {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        // flex: 1,
-    },
     title: {
         textAlign: 'center',
         fontSize: 20,
@@ -226,10 +202,17 @@ const styles = StyleSheet.create({
     hour: {
         padding: 6,
         alignItems: 'center',
+        marginHorizontal: 15,
     },
-    hourlyIcon: {
-        with: 50,
-        height: 50,
+    hourlyTime: {
+        color: 'rgba(255,255,255,0.5)',
+        fontWeight: '200',
+        marginBottom: 10,
+    },
+    hourlyTemp: {
+        fontSize: 20,
+        fontWeight: '400',
+        color: '#fff',
     },
     smallIcon: {
         with: 100,
@@ -239,8 +222,7 @@ const styles = StyleSheet.create({
         width: '100%',
         backgroundColor: 'rgba(255,255,255,0.1)',
         height: 1,
-        marginTop: 30,
-        marginBottom: 30,
+        marginVertical: 30,
     },
 });
 
