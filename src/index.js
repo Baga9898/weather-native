@@ -62,6 +62,7 @@ const Weather = () => {
     const current = forecast.current.weather[0];
     const feelsLike = 'Ощущается ';
     const humidity = 'Влажность ';
+    const windSpeed = 'Скорость ветра';
 
     const days = [
         'Воскресенье',
@@ -114,10 +115,6 @@ const Weather = () => {
                         {feelsLike}
                         {Math.round(forecast.current.feels_like)}°
                     </Text>
-                    {/* <Text style={styles.feelsLike}>
-                        {humidity}
-                        {forecast.current.humidity}%
-                    </Text> */}
                 </View>
                 <View style={styles.currentRight}>
                     <TouchableOpacity onPress={mainIconPressHandler}>
@@ -156,14 +153,13 @@ const Weather = () => {
                 data={forecast.daily.slice(0, 7)}
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={(dayView) => {
-                    // const day = new Date(dayView.item.dt);
-                    // const currentDay = day.getDay();
-                    // const chosentDay = days[currentDay];
-                    // console.log(chosentDay);
+                    const date = new Date(dayView.item.dt * 1000);
+                    const currentDay = date.getDay();
+                    const chosentDay = days[currentDay];
                     return (
                         <View style={styles.dailyRow}>
                             <Text style={styles.dailyDay}>
-                                Day
+                                {chosentDay}
                             </Text>
                             <Text>
                                 i
@@ -180,6 +176,40 @@ const Weather = () => {
                     );
                 }}
             />
+            <View style={styles.extraInfo}>
+                <View style={styles.extraItem}>
+                    <Text style={styles.extraTitle}>
+                        {humidity}
+                    </Text>
+                    <Text style={styles.extraValue}>
+                        {forecast.current.humidity}%
+                    </Text>
+                </View>
+                <View style={styles.extraItem}>
+                    <Text style={styles.extraTitle}>
+                        {windSpeed}
+                    </Text>
+                    <Text style={styles.extraValue}>
+                        {forecast.current.wind_speed} km/h
+                    </Text>
+                </View>
+                <View style={styles.extraItem}>
+                    <Text style={styles.extraTitle}>
+                        Точка росы
+                    </Text>
+                    <Text style={styles.extraValue}>
+                        {forecast.current.dew_point}°
+                    </Text>
+                </View>
+                <View style={styles.extraItem}>
+                    <Text style={styles.extraTitle}>
+                        Давление
+                    </Text>
+                    <Text style={styles.extraValue}>
+                        {forecast.current.pressure} hPa
+                    </Text>
+                </View>
+            </View>
         </ScrollView>
     </LinearGradient>
   )
@@ -224,19 +254,6 @@ const styles = StyleSheet.create({
     feelsLike: {
         color: '#fff',
         marginLeft: 30,
-    },
-    info: {
-        width: Dimensions.get('screen').width/2.5,
-        backgroundColor: 'rgba(0,0,0,0.5)',
-        padding: 10,
-        borderRadius: 15,
-        justifyContent: 'center',
-    },
-    extraInfo: {
-        flexDirection: 'row',
-        marginTop: 20,
-        justifyContent: 'space-between',
-        padding: 10,
     },
     text: {
         fontSize: 20,
@@ -287,6 +304,7 @@ const styles = StyleSheet.create({
     },
     dailyDay: {
         color: '#fff',
+        width: 100,
     },
     dayNNight: {
         flexDirection: 'row',
@@ -299,6 +317,27 @@ const styles = StyleSheet.create({
     },
     dailyTempNight: {
         color: 'rgba(255,255,255,0.5)',
+    },
+    extraInfo: {
+        width: '100%',
+        backgroundColor: 'rgba(150,150,150,0.1)',
+        paddingVertical: 30,
+        paddingHorizontal: 30,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        flexWrap: 'wrap',
+    },
+    extraItem: {
+        marginBottom: 20,
+        width: '50%',
+    },
+    extraTitle: {
+        color: 'rgba(255,255,255,0.5)',
+        marginBottom: 10,
+    },
+    extraValue: {
+        color: '#fff',
+        fontSize: 20,
     },
 });
 
