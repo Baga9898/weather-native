@@ -22,7 +22,6 @@ let url = `http://api.openweathermap.org/data/2.5/onecall?&units=metric&exclude=
 const Weather = () => {
     const [forecast, setForecast] = useState(null);
     const [refreshing, setRefreshing] = useState(false);
-
     const [clicksCount, setClicksCount] = useState(0);
 
     const loadForecast = async () => {
@@ -63,6 +62,16 @@ const Weather = () => {
     const current = forecast.current.weather[0];
     const feelsLike = 'Ощущается ';
     const humidity = 'Влажность ';
+
+    const days = [
+        'Воскресенье',
+        'Понедельник',
+        'Вторник',
+        'Среда',
+        'Четверг',
+        'Пятница',
+        'Суббота',
+    ];
 
     const formatAMPM = (date) => {
         let hours = date.getHours();
@@ -128,8 +137,7 @@ const Weather = () => {
                 data={forecast.hourly.slice(0, 24)}
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={(hour) => {
-                    const weather = hour.item.weather[0];
-                    let date = formatAMPM(new Date(hour.item.dt * 1000));
+                    const date = formatAMPM(new Date(hour.item.dt * 1000));
                     return (
                         <View style={styles.hour}>
                             <Text style={styles.hourlyTime}>
@@ -143,6 +151,35 @@ const Weather = () => {
                 }}
             />
             <View style={styles.devider}></View>
+            <FlatList
+                style={styles.daily}
+                data={forecast.daily.slice(0, 7)}
+                keyExtractor={(item, index) => index.toString()}
+                renderItem={(dayView) => {
+                    // const day = new Date(dayView.item.dt);
+                    // const currentDay = day.getDay();
+                    // const chosentDay = days[currentDay];
+                    // console.log(chosentDay);
+                    return (
+                        <View style={styles.dailyRow}>
+                            <Text style={styles.dailyDay}>
+                                Day
+                            </Text>
+                            <Text>
+                                i
+                            </Text>
+                            <View>
+                                <Text style={styles.dailyTempDay}>
+                                    {Math.round(dayView.item.temp.day)}
+                                </Text>
+                                <Text style={styles.dailyTempNight}>
+                                    {Math.round(dayView.item.temp.night)}
+                                </Text>
+                            </View>
+                        </View>
+                    );
+                }}
+            />
         </ScrollView>
     </LinearGradient>
   )
@@ -238,6 +275,14 @@ const styles = StyleSheet.create({
         width: '100%',
         backgroundColor: 'rgba(255,255,255,0.1)',
         height: 1,
+    },
+    daily: {
+        paddingVertical: 20,
+    },
+    dailyRow: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingHorizontal: 30,
     },
 });
 
