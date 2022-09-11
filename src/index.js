@@ -168,7 +168,7 @@ const Weather = () => {
                             <Text>
                                 i
                             </Text>
-                            <View>
+                            <View style={styles.dayNNight}>
                                 <Text style={styles.dailyTempDay}>
                                     {Math.round(dayView.item.temp.day)}
                                 </Text>
@@ -283,6 +283,22 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         paddingHorizontal: 30,
+        marginBottom: 10,
+    },
+    dailyDay: {
+        color: '#fff',
+    },
+    dayNNight: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        width: 50,
+    },
+    dailyTempDay: {
+        color: '#fff',
+
+    },
+    dailyTempNight: {
+        color: 'rgba(255,255,255,0.5)',
     },
 });
 
