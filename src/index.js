@@ -74,14 +74,14 @@ const Weather = () => {
         'Суббота',
     ];
 
-    const formatAMPM = (date) => {
+    const formatAMPM = (date, withMinutes) => {
         let hours = date.getHours();
         let minutes = date.getMinutes();
         let ampm = hours >= 12 ? 'pm' : 'am';
         hours = hours % 12;
         hours = hours ? hours : 12;
         minutes = minutes.toString().padStart(2, '0');
-        let strTime = `${hours} ${ampm}`;
+        let strTime = withMinutes ? `${hours}:${minutes} ${ampm}` : `${hours} ${ampm}`;
         return strTime;
     }
 
@@ -150,10 +150,12 @@ const Weather = () => {
             case 800:
                 return isMainIcon ? require('../assets/soCold.png') : require('../assets/sunny.png');
             case 801:
+                return isMainIcon ? require('../assets/soCold.png') : require('../assets/fewClouds.png');
             case 802:
+                return isMainIcon ? require('../assets/soCold.png') : require('../assets/scaterredClouds.png');
             case 803:
             case 804:
-                return isMainIcon ? require('../assets/soCold.png') : require('../assets/sunny.png');
+                return isMainIcon ? require('../assets/soCold.png') : require('../assets/brokenClouds.png');
         }
     };
 
@@ -277,6 +279,22 @@ const Weather = () => {
                         {forecast.current.pressure} hPa
                     </Text>
                 </View>
+                <View style={styles.extraItem}>
+                    <Text style={styles.extraTitle}>
+                        Рассвет
+                    </Text>
+                    <Text style={styles.extraValue}>
+                        {formatAMPM(new Date(forecast.current.sunrise * 1000), true)}
+                    </Text>
+                </View>
+                <View style={styles.extraItem}>
+                    <Text style={styles.extraTitle}>
+                        Закат
+                    </Text>
+                    <Text style={styles.extraValue}>
+                        {formatAMPM(new Date(forecast.current.sunset * 1000), true)}
+                    </Text>
+                </View>
             </View>
         </ScrollView>
     </LinearGradient>
@@ -363,6 +381,7 @@ const styles = StyleSheet.create({
     },
     daily: {
         paddingVertical: 20,
+        marginTop: 10,
     },
     dailyRow: {
         flexDirection: 'row',
