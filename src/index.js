@@ -81,7 +81,7 @@ const Weather = () => {
         hours = hours % 12;
         hours = hours ? hours : 12;
         minutes = minutes.toString().padStart(2, '0');
-        let strTime = hours + ' ' + ampm;
+        let strTime = `${hours} ${ampm}`;
         return strTime;
     }
 
@@ -89,6 +89,73 @@ const Weather = () => {
         setClicksCount(clicksCount + 1);
         console.log(clicksCount);
     }
+
+    const iconChoser = (weatherId, isMainIcon) => {
+        switch(weatherId) {
+            case 200:
+            case 201:
+            case 202:
+            case 210:
+            case 211:
+            case 212:
+            case 221:
+            case 230:
+            case 231:
+            case 232:
+                return isMainIcon ? require('../assets/soCold.png') : require('../assets/thunderStorm.png');
+            case 300:
+            case 301:
+            case 302:
+            case 310:
+            case 311:
+            case 312:
+            case 313:
+            case 314:
+            case 321:
+                return isMainIcon ? require('../assets/soCold.png') : require('../assets/drizzle.png');
+            case 500:
+            case 501:
+            case 502:
+            case 503:
+            case 504:
+            case 511:
+            case 520:
+            case 521:
+            case 522:
+            case 531:
+                return isMainIcon ? require('../assets/soCold.png') : require('../assets/rain.png');
+            case 600:
+            case 601:
+            case 602:
+            case 611:
+            case 612:
+            case 613:
+            case 615:
+            case 616:
+            case 620:
+            case 621:
+            case 622:
+                return isMainIcon ? require('../assets/soCold.png') : require('../assets/snow.png');
+            case 701:
+            case 711:
+            case 721:
+            case 731:
+            case 741:
+            case 751:
+            case 761:
+            case 762:
+            case 771:
+            case 781:
+                return isMainIcon ? require('../assets/soCold.png') : require('../assets/nebula.png');
+            case 800:
+                return isMainIcon ? require('../assets/soCold.png') : require('../assets/sunny.png');
+            case 801:
+            case 802:
+            case 803:
+            case 804:
+                return isMainIcon ? require('../assets/soCold.png') : require('../assets/sunny.png');
+        }
+    };
 
   return (
     <LinearGradient
@@ -120,7 +187,7 @@ const Weather = () => {
                     <TouchableOpacity onPress={mainIconPressHandler}>
                         <Image
                             style={styles.largeIcon}
-                            source={require('../assets/soCold.png')}
+                            source={iconChoser(forecast.current.weather[0].id, true)}
                         />
                     </TouchableOpacity>
                 </View>
@@ -152,7 +219,7 @@ const Weather = () => {
                 style={styles.daily}
                 data={forecast.daily.slice(0, 7)}
                 keyExtractor={(item, index) => index.toString()}
-                renderItem={(dayView) => {
+                renderItem={(dayView, index) => {
                     const date = new Date(dayView.item.dt * 1000);
                     const currentDay = date.getDay();
                     const chosentDay = days[currentDay];
@@ -161,9 +228,10 @@ const Weather = () => {
                             <Text style={styles.dailyDay}>
                                 {chosentDay}
                             </Text>
-                            <Text>
-                                i
-                            </Text>
+                            <Image
+                                style={styles.smallIcon}
+                                source={iconChoser(dayView.item.weather[0].id)}
+                            />
                             <View style={styles.dayNNight}>
                                 <Text style={styles.dailyTempDay}>
                                     {Math.round(dayView.item.temp.day)}
@@ -285,8 +353,8 @@ const styles = StyleSheet.create({
         color: '#fff',
     },
     smallIcon: {
-        with: 100,
-        height: 100,
+        with: 24,
+        height: 24,
     },
     devider: {
         width: '100%',
@@ -300,7 +368,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         paddingHorizontal: 30,
-        marginBottom: 10,
+        marginBottom: 15,
     },
     dailyDay: {
         color: '#fff',
