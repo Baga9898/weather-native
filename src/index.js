@@ -63,6 +63,7 @@ const Weather = () => {
     const feelsLike = 'Ощущается ';
     const humidity = 'Влажность ';
     const windSpeed = 'Скорость ветра';
+    const uvi = 'UV индекс ';
 
     const days = [
         'Воскресенье',
@@ -183,6 +184,10 @@ const Weather = () => {
                     <Text style={styles.feelsLike}>
                         {feelsLike}
                         {Math.round(forecast.current.feels_like)}°
+                    </Text>
+                    <Text style={styles.uvi}>
+                        {uvi}
+                        {forecast.current.uvi}
                     </Text>
                 </View>
                 <View style={styles.currentRight}>
@@ -338,6 +343,10 @@ const styles = StyleSheet.create({
         marginBottom: 20,
     },
     feelsLike: {
+        color: '#fff',
+        marginLeft: 30,
+    },
+    uvi: {
         color: '#fff',
         marginLeft: 30,
     },
