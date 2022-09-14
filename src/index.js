@@ -11,13 +11,22 @@ import {
     ScrollView, 
     RefreshControl, 
     Image, 
-    Dimensions,
     FlatList,
     TouchableOpacity,
 } from 'react-native';
-
-const openWeatherKey = '874d0af8e952eb0b39aa7aa85cefabf8';
-let url = `http://api.openweathermap.org/data/2.5/onecall?&units=metric&exclude=minutely&lang=ru&appid=${openWeatherKey}`;
+import { 
+    feelsLike,
+    humidity,
+    windSpeed,
+    uvi,
+    days,
+    dewPoint,
+    pressure,
+    sunrise,
+    sunset,
+} from './weatherTexts';
+import { iconChoser } from './helpers';
+import { url } from './constants';
 
 const Weather = () => {
     const [forecast, setForecast] = useState(null);
@@ -60,20 +69,6 @@ const Weather = () => {
     }
 
     const current = forecast.current.weather[0];
-    const feelsLike = 'Ощущается ';
-    const humidity = 'Влажность ';
-    const windSpeed = 'Скорость ветра';
-    const uvi = 'UV индекс ';
-
-    const days = [
-        'Воскресенье',
-        'Понедельник',
-        'Вторник',
-        'Среда',
-        'Четверг',
-        'Пятница',
-        'Суббота',
-    ];
 
     const formatAMPM = (date, withMinutes) => {
         let hours = date.getHours();
@@ -90,75 +85,6 @@ const Weather = () => {
         setClicksCount(clicksCount + 1);
         console.log(clicksCount);
     }
-
-    const iconChoser = (weatherId, isMainIcon) => {
-        switch(weatherId) {
-            case 200:
-            case 201:
-            case 202:
-            case 210:
-            case 211:
-            case 212:
-            case 221:
-            case 230:
-            case 231:
-            case 232:
-                return isMainIcon ? require('../assets/soCold.png') : require('../assets/thunderStorm.png');
-            case 300:
-            case 301:
-            case 302:
-            case 310:
-            case 311:
-            case 312:
-            case 313:
-            case 314:
-            case 321:
-                return isMainIcon ? require('../assets/soCold.png') : require('../assets/drizzle.png');
-            case 500:
-            case 501:
-            case 502:
-            case 503:
-            case 504:
-            case 511:
-            case 520:
-            case 521:
-            case 522:
-            case 531:
-                return isMainIcon ? require('../assets/soCold.png') : require('../assets/rain.png');
-            case 600:
-            case 601:
-            case 602:
-            case 611:
-            case 612:
-            case 613:
-            case 615:
-            case 616:
-            case 620:
-            case 621:
-            case 622:
-                return isMainIcon ? require('../assets/soCold.png') : require('../assets/snow.png');
-            case 701:
-            case 711:
-            case 721:
-            case 731:
-            case 741:
-            case 751:
-            case 761:
-            case 762:
-            case 771:
-            case 781:
-                return isMainIcon ? require('../assets/soCold.png') : require('../assets/nebula.png');
-            case 800:
-                return isMainIcon ? require('../assets/soCold.png') : require('../assets/sunny.png');
-            case 801:
-                return isMainIcon ? require('../assets/soCold.png') : require('../assets/fewClouds.png');
-            case 802:
-                return isMainIcon ? require('../assets/soCold.png') : require('../assets/scaterredClouds.png');
-            case 803:
-            case 804:
-                return isMainIcon ? require('../assets/soCold.png') : require('../assets/brokenClouds.png');
-        }
-    };
 
   return (
     <LinearGradient
@@ -200,7 +126,7 @@ const Weather = () => {
                 </View>
             </View>
             <Text style={styles.currentDescription}>
-                        {current.description}
+                {current.description}
             </Text>
             <View style={styles.devider}></View>
             <FlatList
@@ -229,11 +155,11 @@ const Weather = () => {
                 renderItem={(dayView, index) => {
                     const date = new Date(dayView.item.dt * 1000);
                     const currentDay = date.getDay();
-                    const chosentDay = days[currentDay];
+                    const chosenDay = days[currentDay];
                     return (
                         <View style={styles.dailyRow}>
                             <Text style={styles.dailyDay}>
-                                {chosentDay}
+                                {chosenDay}
                             </Text>
                             <Image
                                 style={styles.smallIcon}
@@ -270,7 +196,7 @@ const Weather = () => {
                 </View>
                 <View style={styles.extraItem}>
                     <Text style={styles.extraTitle}>
-                        Точка росы
+                        {dewPoint}
                     </Text>
                     <Text style={styles.extraValue}>
                         {forecast.current.dew_point}°
@@ -278,7 +204,7 @@ const Weather = () => {
                 </View>
                 <View style={styles.extraItem}>
                     <Text style={styles.extraTitle}>
-                        Давление
+                        {pressure}
                     </Text>
                     <Text style={styles.extraValue}>
                         {forecast.current.pressure} hPa
@@ -286,7 +212,7 @@ const Weather = () => {
                 </View>
                 <View style={styles.extraItem}>
                     <Text style={styles.extraTitle}>
-                        Рассвет
+                        {sunrise}
                     </Text>
                     <Text style={styles.extraValue}>
                         {formatAMPM(new Date(forecast.current.sunrise * 1000), true)}
@@ -294,7 +220,7 @@ const Weather = () => {
                 </View>
                 <View style={styles.extraItem}>
                     <Text style={styles.extraTitle}>
-                        Закат
+                        {sunset}
                     </Text>
                     <Text style={styles.extraValue}>
                         {formatAMPM(new Date(forecast.current.sunset * 1000), true)}
