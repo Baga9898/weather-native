@@ -1,10 +1,8 @@
-import React, {useState, useEffect}    from 'react';
-import { LinearGradient }              from 'expo-linear-gradient';
-import { iconChoser, formatAMPM }      from './helpers';
-import { url }                         from './constants';
-import { styles }                      from './style';
+import React, {useState, useEffect}               from 'react';
+import { LinearGradient }                         from 'expo-linear-gradient';
+import { iconChoser, formatAMPM, loadForecast }   from './helpers';
+import { styles }                                 from './style';
 import { 
-    Alert, 
     SafeAreaView, 
     View, 
     Text, 
@@ -14,7 +12,7 @@ import {
     Image, 
     FlatList,
     TouchableOpacity,
-}                                      from 'react-native';
+} from 'react-native';
 import { 
     feelsLike,
     humidity,
@@ -25,43 +23,15 @@ import {
     pressure,
     sunrise,
     sunset,
-    noLocationInfo,
-    tryGrantAccess,
-    errorTitle,
-    someWentWrong,
-}                                      from './weatherTexts';
-import * as Location                   from 'expo-location';
+} from './weatherTexts';
 
 const Weather = () => {
     const [forecast, setForecast] = useState(null);
     const [refreshing, setRefreshing] = useState(false);
     const [clicksCount, setClicksCount] = useState(0);
 
-    const loadForecast = async () => {
-        setRefreshing(true);
-
-        const { status } = await Location.requestForegroundPermissionsAsync();
-
-        if (status !== 'granted') {
-            Alert.alert(noLocationInfo, tryGrantAccess);
-        }
-
-        let location = await Location.getCurrentPositionAsync({ enableHighAccuracy: true });
-
-        response = await fetch(`${url}&lat=${location.coords.latitude}&lon=${location.coords.longitude}`);
-        const data = await response.json();
-
-        if (!response.ok) {
-            Alert.alert(errorTitle, someWentWrong);
-        } else {
-            setForecast(data);
-        }
-
-        setRefreshing(false);
-    }
-
     useEffect(() => {
-        loadForecast();
+        loadForecast(setRefreshing, setForecast);
     }, []);
 
     if (!forecast) {
@@ -90,7 +60,7 @@ const Weather = () => {
             refreshControl={
                 <RefreshControl 
                 refreshing={refreshing} 
-                onRefresh={() => loadForecast()} 
+                onRefresh={() => loadForecast(setRefreshing, setForecast)} 
                 />
             }
             style={{marginTop: 50}}

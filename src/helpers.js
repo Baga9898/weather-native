@@ -1,4 +1,28 @@
+import { noLocationInfo, tryGrantAccess, errorTitle, someWentWrong } from './weatherTexts';
+import { Alert }                                                     from 'react-native';
+import { url }                                                       from './constants';
+import * as Location                                                 from 'expo-location';
 
+export const loadForecast = async (setRefreshing, setForecast) => {
+    setRefreshing(true);
+    const { status } = await Location.requestForegroundPermissionsAsync();
+
+    if (status !== 'granted') {
+        Alert.alert(noLocationInfo, tryGrantAccess);
+    }
+
+    let location = await Location.getCurrentPositionAsync({ enableHighAccuracy: true });
+    response = await fetch(`${url}&lat=${location.coords.latitude}&lon=${location.coords.longitude}`);
+    const data = await response.json();
+
+    if (!response.ok) {
+        Alert.alert(errorTitle, someWentWrong);
+    } else {
+        setForecast(data);
+    }
+
+    setRefreshing(false);
+}
 
 export const formatAMPM = (date, withMinutes) => {
     let hours = date.getHours();
