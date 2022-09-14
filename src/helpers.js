@@ -1,3 +1,16 @@
+
+
+export const formatAMPM = (date, withMinutes) => {
+    let hours = date.getHours();
+    let minutes = date.getMinutes();
+    let ampm = hours >= 12 ? 'pm' : 'am';
+    hours = hours % 12;
+    hours = hours ? hours : 12;
+    minutes = minutes.toString().padStart(2, '0');
+    let strTime = withMinutes ? `${hours}:${minutes} ${ampm}` : `${hours} ${ampm}`;
+    return strTime;
+}
+
 export const iconChoser = (weatherId, isMainIcon) => {
     switch(weatherId) {
         case 200:

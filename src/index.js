@@ -1,19 +1,20 @@
-import React, {useState, useEffect} from 'react';
-import * as Location from 'expo-location';
-import { LinearGradient } from 'expo-linear-gradient';
+import React, {useState, useEffect}    from 'react';
+import { LinearGradient }              from 'expo-linear-gradient';
+import { iconChoser, formatAMPM }      from './helpers';
+import { url }                         from './constants';
+import { styles }                      from './style';
 import { 
     Alert, 
     SafeAreaView, 
     View, 
     Text, 
-    StyleSheet, 
     ActivityIndicator, 
     ScrollView, 
     RefreshControl, 
     Image, 
     FlatList,
     TouchableOpacity,
-} from 'react-native';
+}                                      from 'react-native';
 import { 
     feelsLike,
     humidity,
@@ -24,9 +25,12 @@ import {
     pressure,
     sunrise,
     sunset,
-} from './weatherTexts';
-import { iconChoser } from './helpers';
-import { url } from './constants';
+    noLocationInfo,
+    tryGrantAccess,
+    errorTitle,
+    someWentWrong,
+}                                      from './weatherTexts';
+import * as Location                   from 'expo-location';
 
 const Weather = () => {
     const [forecast, setForecast] = useState(null);
@@ -39,7 +43,7 @@ const Weather = () => {
         const { status } = await Location.requestForegroundPermissionsAsync();
 
         if (status !== 'granted') {
-            Alert.alert('Невозможно получить значение текущей локации', 'Попробуйте предоставить приложению доступ к геолокации');
+            Alert.alert(noLocationInfo, tryGrantAccess);
         }
 
         let location = await Location.getCurrentPositionAsync({ enableHighAccuracy: true });
@@ -48,7 +52,7 @@ const Weather = () => {
         const data = await response.json();
 
         if (!response.ok) {
-            Alert.alert('Ошибка', 'Что - то пошло не так');
+            Alert.alert(errorTitle, someWentWrong);
         } else {
             setForecast(data);
         }
@@ -69,17 +73,6 @@ const Weather = () => {
     }
 
     const current = forecast.current.weather[0];
-
-    const formatAMPM = (date, withMinutes) => {
-        let hours = date.getHours();
-        let minutes = date.getMinutes();
-        let ampm = hours >= 12 ? 'pm' : 'am';
-        hours = hours % 12;
-        hours = hours ? hours : 12;
-        minutes = minutes.toString().padStart(2, '0');
-        let strTime = withMinutes ? `${hours}:${minutes} ${ampm}` : `${hours} ${ampm}`;
-        return strTime;
-    }
 
     const mainIconPressHandler = () => {
         setClicksCount(clicksCount + 1);
@@ -231,136 +224,5 @@ const Weather = () => {
     </LinearGradient>
   )
 }
-
-const styles = StyleSheet.create({
-    title: {
-        textAlign: 'center',
-        fontSize: 20,
-        color: '#fff',
-    },
-    current: {
-        flexDirection: 'row', 
-        justifyContent: 'space-between', 
-        marginBottom: 20,
-    },
-    currentLeft: {
-        paddingTop: 30,
-    },
-    currentRight: {
-        marginRight: 10,
-    },
-    largeIcon: {
-        width: 170,
-        height: 250,
-    },
-    currentTemp: {
-        fontSize: 55,
-        fontWeight: 'bold',
-        color: '#fff',
-        marginLeft: 30,
-    },
-    currentDescription: {
-        width: '100%',
-        fontWeight: '400',
-        fontSize: 20,
-        marginBottom: 5,
-        marginLeft: 30,
-        color: '#fff',
-        marginBottom: 20,
-    },
-    feelsLike: {
-        color: '#fff',
-        marginLeft: 30,
-    },
-    uvi: {
-        color: '#fff',
-        marginLeft: 30,
-    },
-    text: {
-        fontSize: 20,
-        color: '#fff',
-        textAlign: 'center',
-    },
-    subtitle: {
-        fontSize: 24,
-        marginVertical: 12,
-        marginLeft: 7,
-        color: '#fff',
-        fontWeight: 'bold',
-        marginLeft: 30,
-    },
-    hour: {
-        padding: 6,
-        alignItems: 'center',
-        marginHorizontal: 15,
-        marginVertical: 30,
-    },
-    hourlyTime: {
-        color: 'rgba(255,255,255,0.5)',
-        fontWeight: '200',
-        marginBottom: 10,
-    },
-    hourlyTemp: {
-        fontSize: 20,
-        fontWeight: '400',
-        color: '#fff',
-    },
-    smallIcon: {
-        with: 24,
-        height: 24,
-    },
-    devider: {
-        width: '100%',
-        backgroundColor: 'rgba(255,255,255,0.1)',
-        height: 1,
-    },
-    daily: {
-        paddingVertical: 20,
-        marginTop: 10,
-    },
-    dailyRow: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        paddingHorizontal: 30,
-        marginBottom: 15,
-    },
-    dailyDay: {
-        color: '#fff',
-        width: 100,
-    },
-    dayNNight: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        width: 50,
-    },
-    dailyTempDay: {
-        color: '#fff',
-
-    },
-    dailyTempNight: {
-        color: 'rgba(255,255,255,0.5)',
-    },
-    extraInfo: {
-        width: '100%',
-        backgroundColor: 'rgba(150,150,150,0.1)',
-        paddingVertical: 30,
-        paddingHorizontal: 30,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        flexWrap: 'wrap',
-    },
-    extraItem: {
-        marginBottom: 20,
-        width: '50%',
-    },
-    extraTitle: {
-        color: 'rgba(255,255,255,0.5)',
-        marginBottom: 10,
-    },
-    extraValue: {
-        color: '#fff',
-        fontSize: 20,
-    },
-});
 
 export default Weather;
