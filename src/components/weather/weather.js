@@ -1,7 +1,7 @@
 import React, {useState, useEffect}               from 'react';
 import { LinearGradient }                         from 'expo-linear-gradient';
-import { iconChoser, formatAMPM, loadForecast }   from './helpers';
-import { styles }                                 from './style';
+import { iconChoser, formatAMPM, loadForecast }   from '../../helpers';
+import { styles }                                 from '../../style';
 import { 
     SafeAreaView, 
     View, 
@@ -23,7 +23,7 @@ import {
     pressure,
     sunrise,
     sunset,
-} from './weatherTexts';
+} from '../../weatherTexts';
 
 const Weather = () => {
     const [forecast, setForecast] = useState(null);

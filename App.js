@@ -1,5 +1,5 @@
 import { StyleSheet, View } from 'react-native';
-import Weather from './src/index';
+import Weather from './src/components/weather/weather';
 
 const App = () => {
   return (
