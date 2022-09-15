@@ -47,7 +47,7 @@ export const iconChoser = (weatherId, isMainIcon) => {
         case 230:
         case 231:
         case 232:
-            return isMainIcon ? require('../assets/soCold.png') : require('../assets/thunderStorm.png');
+            return isMainIcon ? require('../assets/stickers/soCold.png') : require('../assets/weatherIcons/ThunderStorm/thunderStorm.png');
         case 300:
         case 301:
         case 302:
@@ -57,7 +57,7 @@ export const iconChoser = (weatherId, isMainIcon) => {
         case 313:
         case 314:
         case 321:
-            return isMainIcon ? require('../assets/soCold.png') : require('../assets/drizzle.png');
+            return isMainIcon ? require('../assets/stickers/soCold.png') : require('../assets/weatherIcons/Drizzle/drizzle.png');
         case 500:
         case 501:
         case 502:
@@ -68,7 +68,7 @@ export const iconChoser = (weatherId, isMainIcon) => {
         case 521:
         case 522:
         case 531:
-            return isMainIcon ? require('../assets/soCold.png') : require('../assets/rain.png');
+            return isMainIcon ? require('../assets/stickers/soCold.png') : require('../assets/weatherIcons/Rain/rain.png');
         case 600:
         case 601:
         case 602:
@@ -80,7 +80,7 @@ export const iconChoser = (weatherId, isMainIcon) => {
         case 620:
         case 621:
         case 622:
-            return isMainIcon ? require('../assets/soCold.png') : require('../assets/snow.png');
+            return isMainIcon ? require('../assets/stickers/soCold.png') : require('../assets/weatherIcons/Snow/snow.png');
         case 701:
         case 711:
         case 721:
@@ -91,15 +91,15 @@ export const iconChoser = (weatherId, isMainIcon) => {
         case 762:
         case 771:
         case 781:
-            return isMainIcon ? require('../assets/soCold.png') : require('../assets/nebula.png');
+            return isMainIcon ? require('../assets/stickers/soCold.png') : require('../assets/weatherIcons/Atmosphere/nebula.png');
         case 800:
-            return isMainIcon ? require('../assets/soCold.png') : require('../assets/sunny.png');
+            return isMainIcon ? require('../assets/stickers/soCold.png') : require('../assets/weatherIcons/Clear/sunny.png');
         case 801:
-            return isMainIcon ? require('../assets/soCold.png') : require('../assets/fewClouds.png');
+            return isMainIcon ? require('../assets/stickers/soCold.png') : require('../assets/weatherIcons/Clouds/fewClouds.png');
         case 802:
-            return isMainIcon ? require('../assets/soCold.png') : require('../assets/scaterredClouds.png');
+            return isMainIcon ? require('../assets/stickers/soCold.png') : require('../assets/weatherIcons/Clouds/scaterredClouds.png');
         case 803:
         case 804:
-            return isMainIcon ? require('../assets/soCold.png') : require('../assets/brokenClouds.png');
+            return isMainIcon ? require('../assets/stickers/soCold.png') : require('../assets/weatherIcons/Clouds/brokenClouds.png');
     }
 };
