@@ -12,7 +12,7 @@ import {
     Image, 
     FlatList,
     TouchableOpacity,
-} from 'react-native';
+}                                                 from 'react-native';
 import { 
     feelsLike,
     humidity,
@@ -23,7 +23,8 @@ import {
     pressure,
     sunrise,
     sunset,
-} from '../../weatherTexts';
+}                                                 from '../../weatherTexts';
+import ExtraItem                                  from '../extraItem/extraItem';
 
 const Weather = () => {
     const [forecast, setForecast] = useState(null);
@@ -141,54 +142,12 @@ const Weather = () => {
                 }}
             />
             <View style={styles.extraInfo}>
-                <View style={styles.extraItem}>
-                    <Text style={styles.extraTitle}>
-                        {humidity}
-                    </Text>
-                    <Text style={styles.extraValue}>
-                        {forecast.current.humidity}%
-                    </Text>
-                </View>
-                <View style={styles.extraItem}>
-                    <Text style={styles.extraTitle}>
-                        {windSpeed}
-                    </Text>
-                    <Text style={styles.extraValue}>
-                        {forecast.current.wind_speed} km/h
-                    </Text>
-                </View>
-                <View style={styles.extraItem}>
-                    <Text style={styles.extraTitle}>
-                        {dewPoint}
-                    </Text>
-                    <Text style={styles.extraValue}>
-                        {forecast.current.dew_point}°
-                    </Text>
-                </View>
-                <View style={styles.extraItem}>
-                    <Text style={styles.extraTitle}>
-                        {pressure}
-                    </Text>
-                    <Text style={styles.extraValue}>
-                        {forecast.current.pressure} hPa
-                    </Text>
-                </View>
-                <View style={styles.extraItem}>
-                    <Text style={styles.extraTitle}>
-                        {sunrise}
-                    </Text>
-                    <Text style={styles.extraValue}>
-                        {formatAMPM(new Date(forecast.current.sunrise * 1000), true)}
-                    </Text>
-                </View>
-                <View style={styles.extraItem}>
-                    <Text style={styles.extraTitle}>
-                        {sunset}
-                    </Text>
-                    <Text style={styles.extraValue}>
-                        {formatAMPM(new Date(forecast.current.sunset * 1000), true)}
-                    </Text>
-                </View>
+                <ExtraItem title={humidity} value={forecast.current.humidity} valueMetric={'%'}/>
+                <ExtraItem title={windSpeed} value={forecast.current.wind_speed} valueMetric={'km/h'}/>
+                <ExtraItem title={dewPoint} value={forecast.current.dew_point} valueMetric={'°'}/>
+                <ExtraItem title={pressure} value={forecast.current.pressure} valueMetric={'hPa'}/>
+                <ExtraItem title={sunrise} value={formatAMPM(new Date(forecast.current.sunrise * 1000), true)} valueMetric={''}/>
+                <ExtraItem title={sunset} value={formatAMPM(new Date(forecast.current.sunset * 1000), true)} valueMetric={''}/>
             </View>
         </ScrollView>
     </LinearGradient>
