@@ -1,4 +1,11 @@
-import React from 'react'
+import React            from 'react';
+import { formatAMPM }   from '../../helpers';
+import { styles }       from '../../style';
+import { 
+    View, 
+    Text, 
+    FlatList,
+}                       from 'react-native';
 
 const Hourly = ({ forecast }) => {
     return (

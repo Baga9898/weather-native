@@ -6,7 +6,7 @@ export const styles = StyleSheet.create({
         fontSize: 20,
         color: '#fff',
     },
-    current: {
+    currentWrapper: {
         flexDirection: 'row', 
         justifyContent: 'space-between', 
         marginBottom: 20,

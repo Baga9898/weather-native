@@ -1,30 +1,20 @@
-import React, {useState, useEffect}               from 'react';
-import { LinearGradient }                         from 'expo-linear-gradient';
-import { iconChoser, formatAMPM, loadForecast }   from '../../helpers';
-import { styles }                                 from '../../style';
+import React, {useState, useEffect}   from 'react';
+import { LinearGradient }             from 'expo-linear-gradient';
+import { loadForecast }               from '../../helpers';
 import { 
     SafeAreaView, 
-    View, 
-    Text, 
     ActivityIndicator, 
     ScrollView, 
     RefreshControl, 
-    Image, 
-    FlatList,
-    TouchableOpacity,
-}                                                 from 'react-native';
-import { 
-    feelsLike,
-    uvi,
-}                                                 from '../../weatherTexts';
-import ExtraInfo from '../extraInfo/extraInfo';
-import Daily from '../daily/daily';
-import Hourly from '../hourly/hourly';
+}                                     from 'react-native';
+import MainScreen                     from '../mainScreen/mainScreen';
+import Hourly                         from '../hourly/hourly';
+import Daily                          from '../daily/daily';
+import ExtraInfo                      from '../extraInfo/extraInfo';
 
 const Weather = () => {
     const [forecast, setForecast] = useState(null);
     const [refreshing, setRefreshing] = useState(false);
-    const [clicksCount, setClicksCount] = useState(0);
 
     useEffect(() => {
         loadForecast(setRefreshing, setForecast);
@@ -38,13 +28,6 @@ const Weather = () => {
         );
     }
 
-    const current = forecast.current.weather[0];
-
-    const mainIconPressHandler = () => {
-        setClicksCount(clicksCount + 1);
-        console.log(clicksCount);
-    }
-
   return (
     <LinearGradient
         colors={['#4681c9', '#364699']}
@@ -53,22 +36,18 @@ const Weather = () => {
         style={{ flex: 1 }}
     >
         <ScrollView 
+            style={{marginTop: 50}}
             refreshControl={
                 <RefreshControl 
-                refreshing={refreshing} 
-                onRefresh={() => loadForecast(setRefreshing, setForecast)} 
+                    refreshing={refreshing} 
+                    onRefresh={() => loadForecast(setRefreshing, setForecast)} 
                 />
             }
-            style={{marginTop: 50}}
         >
-
-
-
-
+            <MainScreen forecast={forecast}/>
             <Hourly forecast={forecast}/>
             <Daily forecast={forecast}/>
             <ExtraInfo forecast={forecast}/>
-            
         </ScrollView>
     </LinearGradient>
   )
