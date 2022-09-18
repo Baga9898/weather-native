@@ -21,6 +21,12 @@ export const styles = StyleSheet.create({
         width: 170,
         height: 250,
     },
+    mediumIcon: {
+        width: 80,
+        height: 80,
+        marginTop: 25,
+        marginLeft: 30,
+    },
     currentTemp: {
         fontSize: 55,
         fontWeight: 'bold',

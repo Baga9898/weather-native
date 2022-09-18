@@ -33,6 +33,10 @@ const MainScreen = ({ forecast }) => {
                         {uvi}
                         {forecast.current.uvi}
                     </Text>
+                    <Image
+                        style={styles.mediumIcon}
+                        source={iconChoser(forecast.current.weather[0].id, false, true)}
+                    />
                 </View>
 
                 <View style={styles.currentRight}>
