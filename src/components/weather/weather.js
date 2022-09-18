@@ -15,17 +15,10 @@ import {
 }                                                 from 'react-native';
 import { 
     feelsLike,
-    humidity,
-    windSpeed,
     uvi,
-    days,
-    dewPoint,
-    pressure,
-    sunrise,
-    sunset,
 }                                                 from '../../weatherTexts';
-import ExtraItem                                  from '../extraItem/extraItem';
 import ExtraInfo from '../extraInfo/extraInfo';
+import Daily from '../daily/daily';
 
 const Weather = () => {
     const [forecast, setForecast] = useState(null);
@@ -119,36 +112,8 @@ const Weather = () => {
                 }}
             />
             <View style={styles.devider}></View>
-
-            <FlatList
-                style={styles.daily}
-                data={forecast.daily.slice(0, 7)}
-                keyExtractor={(item, index) => index.toString()}
-                renderItem={(dayView, index) => {
-                    const date = new Date(dayView.item.dt * 1000);
-                    const currentDay = date.getDay();
-                    const chosenDay = days[currentDay];
-                    return (
-                        <View style={styles.dailyRow}>
-                            <Text style={styles.dailyDay}>
-                                {chosenDay}
-                            </Text>
-                            <Image
-                                style={styles.smallIcon}
-                                source={iconChoser(dayView.item.weather[0].id)}
-                            />
-                            <View style={styles.dayNNight}>
-                                <Text style={styles.dailyTempDay}>
-                                    {Math.round(dayView.item.temp.day)}
-                                </Text>
-                                <Text style={styles.dailyTempNight}>
-                                    {Math.round(dayView.item.temp.night)}
-                                </Text>
-                            </View>
-                        </View>
-                    );
-                }}
-            />
+            
+            <Daily forecast={forecast}/>
             <ExtraInfo forecast={forecast}/>
             
         </ScrollView>
