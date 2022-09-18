@@ -25,6 +25,7 @@ import {
     sunset,
 }                                                 from '../../weatherTexts';
 import ExtraItem                                  from '../extraItem/extraItem';
+import ExtraInfo from '../extraInfo/extraInfo';
 
 const Weather = () => {
     const [forecast, setForecast] = useState(null);
@@ -66,7 +67,9 @@ const Weather = () => {
             }
             style={{marginTop: 50}}
         >
+
             <View style={styles.current}>
+
                 <View style={styles.currentLeft}>
                     <Text style={styles.currentTemp}>
                         {Math.round(forecast.current.temp)}°
@@ -80,6 +83,7 @@ const Weather = () => {
                         {forecast.current.uvi}
                     </Text>
                 </View>
+
                 <View style={styles.currentRight}>
                     <TouchableOpacity onPress={mainIconPressHandler}>
                         <Image
@@ -88,10 +92,13 @@ const Weather = () => {
                         />
                     </TouchableOpacity>
                 </View>
+
             </View>
+
             <Text style={styles.currentDescription}>
                 {current.description}
             </Text>
+
             <View style={styles.devider}></View>
             <FlatList
                 horizontal
@@ -112,6 +119,7 @@ const Weather = () => {
                 }}
             />
             <View style={styles.devider}></View>
+
             <FlatList
                 style={styles.daily}
                 data={forecast.daily.slice(0, 7)}
@@ -141,14 +149,8 @@ const Weather = () => {
                     );
                 }}
             />
-            <View style={styles.extraInfo}>
-                <ExtraItem title={humidity} value={forecast.current.humidity} valueMetric={'%'}/>
-                <ExtraItem title={windSpeed} value={forecast.current.wind_speed} valueMetric={'km/h'}/>
-                <ExtraItem title={dewPoint} value={forecast.current.dew_point} valueMetric={'°'}/>
-                <ExtraItem title={pressure} value={forecast.current.pressure} valueMetric={'hPa'}/>
-                <ExtraItem title={sunrise} value={formatAMPM(new Date(forecast.current.sunrise * 1000), true)} valueMetric={''}/>
-                <ExtraItem title={sunset} value={formatAMPM(new Date(forecast.current.sunset * 1000), true)} valueMetric={''}/>
-            </View>
+            <ExtraInfo forecast={forecast}/>
+            
         </ScrollView>
     </LinearGradient>
   )
