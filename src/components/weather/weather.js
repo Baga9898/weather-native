@@ -2,7 +2,6 @@ import React, {useState, useEffect}   from 'react';
 import { LinearGradient }             from 'expo-linear-gradient';
 import { loadForecast }               from '../../helpers';
 import { 
-    SafeAreaView, 
     ActivityIndicator, 
     ScrollView, 
     RefreshControl, 
@@ -22,9 +21,18 @@ const Weather = () => {
 
     if (!forecast) {
         return (
-            <SafeAreaView>
+            <LinearGradient
+                colors={['#4681c9', '#364699']}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 1 }}
+                style={{ 
+                    flex: 1,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                }}
+            >
                 <ActivityIndicator size='large' />
-            </SafeAreaView>
+            </LinearGradient>
         );
     }
 
