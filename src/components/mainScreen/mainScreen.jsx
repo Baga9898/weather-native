@@ -8,6 +8,7 @@ import {
     TouchableOpacity,
 }                           from 'react-native';
 import { feelsLike, uvi }   from '../../weatherTexts';
+import LeftSide from './leftSide';
 
 const MainScreen = ({ forecast }) => {
     const [clicksCount, setClicksCount] = useState(0);
@@ -15,29 +16,15 @@ const MainScreen = ({ forecast }) => {
 
     const mainIconPressHandler = () => {
         setClicksCount(clicksCount + 1);
-        console.log(clicksCount);
+        if(clicksCount === 100) {
+            console.log('Yep!');
+        }
     }
 
     return (
         <View style={styles.current}>
             <View style={styles.currentWrapper}>
-                <View style={styles.currentLeft}>
-                    <Text style={styles.currentTemp}>
-                        {Math.round(forecast.current.temp)}°
-                    </Text>
-                    <Text style={styles.feelsLike}>
-                        {feelsLike}
-                        {Math.round(forecast.current.feels_like)}°
-                    </Text>
-                    <Text style={styles.uvi}>
-                        {uvi}
-                        {forecast.current.uvi}
-                    </Text>
-                    <Image
-                        style={styles.mediumIcon}
-                        source={iconChoser(forecast.current.weather[0].id, false, true)}
-                    />
-                </View>
+                <LeftSide forecast={forecast}/>
 
                 <View style={styles.currentRight}>
                     <TouchableOpacity onPress={mainIconPressHandler}>
