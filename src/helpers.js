@@ -71,7 +71,6 @@ export const iconChoser = (weatherId, isMainIcon, isEight) => {
         case 502:
         case 503:
         case 504:
-        case 511:
         case 520:
         case 521:
         case 522:
@@ -81,6 +80,12 @@ export const iconChoser = (weatherId, isMainIcon, isEight) => {
                 : isEight 
                     ? require('../assets/weatherIcons/Rain/rain80.png') 
                     : require('../assets/weatherIcons/Rain/rain.png');
+        case 511:
+            return isMainIcon 
+                ? require('../assets/stickers/soCold.png') 
+                : isEight 
+                    ? require('../assets/weatherIcons/Rain/snowRain80.png') 
+                    : require('../assets/weatherIcons/Rain/snowRain.png');
         case 600:
         case 601:
         case 602:
@@ -100,18 +105,28 @@ export const iconChoser = (weatherId, isMainIcon, isEight) => {
         case 701:
         case 711:
         case 721:
-        case 731:
         case 741:
         case 751:
         case 761:
         case 762:
         case 771:
-        case 781:
             return isMainIcon 
                 ? require('../assets/stickers/soCold.png') 
                 : isEight 
                     ? require('../assets/weatherIcons/Atmosphere/nebula80.png') 
                     : require('../assets/weatherIcons/Atmosphere/nebula.png');
+        case 781:
+            return isMainIcon 
+                ? require('../assets/stickers/soCold.png') 
+                : isEight 
+                    ? require('../assets/weatherIcons/Atmosphere/tornado80.png') 
+                    : require('../assets/weatherIcons/Atmosphere/tornado.png');
+        case 731:
+            return isMainIcon 
+                ? require('../assets/stickers/soCold.png') 
+                : isEight 
+                    ? require('../assets/weatherIcons/Atmosphere/dust80.png') 
+                    : require('../assets/weatherIcons/Atmosphere/dust.png');
         case 800:
             return isMainIcon 
                 ? require('../assets/stickers/soCold.png') 

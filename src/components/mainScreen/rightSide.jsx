@@ -1,13 +1,13 @@
-import React            from 'react';
-import { iconChoser }   from '../../helpers';
-import { styles }       from '../../style';
+import React, { useState }   from 'react';
+import { iconChoser }        from '../../helpers';
+import { styles }            from '../../style';
 import { 
     View, 
     Image, 
     TouchableOpacity,
-}                       from 'react-native';
+}                            from 'react-native';
 
-const RightSide = () => {
+const RightSide = ({ forecast }) => {
     const [clicksCount, setClicksCount] = useState(0);
     
     const mainIconPressHandler = () => {
