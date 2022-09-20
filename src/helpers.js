@@ -1,7 +1,12 @@
-import { noLocationInfo, tryGrantAccess, errorTitle, someWentWrong } from './weatherTexts';
-import { Alert }                                                     from 'react-native';
-import { url }                                                       from './constants';
-import * as Location                                                 from 'expo-location';
+import { Alert, Animated }   from 'react-native';
+import { url }               from './constants';
+import { 
+    noLocationInfo, 
+    tryGrantAccess, 
+    errorTitle, 
+    someWentWrong 
+}                            from './weatherTexts';
+import * as Location         from 'expo-location';
 
 export const loadForecast = async (setRefreshing, setForecast) => {
     setRefreshing(true);
@@ -33,6 +38,14 @@ export const formatAMPM = (date, withMinutes) => {
     minutes = minutes.toString().padStart(2, '0');
     let strTime = withMinutes ? `${hours}:${minutes} ${ampm}` : `${hours} ${ampm}`;
     return strTime;
+}
+
+export const fadeIn = (animation) => {
+    Animated.timing(animation, {
+        toValue: 1,
+        duration: 1000,
+        useNativeDriver: true,
+    }).start();
 }
 
 export const iconChoser = (weatherId, isMainIcon, isEight) => {

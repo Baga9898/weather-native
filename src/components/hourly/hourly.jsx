@@ -1,15 +1,20 @@
-import React            from 'react';
-import { formatAMPM }   from '../../helpers';
-import { styles }       from '../../style';
+import React, { useState }      from 'react';
+import { fadeIn, formatAMPM }   from '../../helpers';
+import { styles }               from '../../style';
 import { 
     View, 
     Text, 
     FlatList,
-}                       from 'react-native';
+    Animated,
+}                               from 'react-native';
 
 const Hourly = ({ forecast }) => {
+    const opacity = useState(new Animated.Value(0)) [0];
+
+    fadeIn(opacity);
+
     return (
-        <>
+        <Animated.View style={[{opacity}]}>
             <View style={styles.devider}></View>
             <FlatList
                 horizontal
@@ -30,7 +35,7 @@ const Hourly = ({ forecast }) => {
                 }}
             />
             <View style={styles.devider}></View>
-        </>
+        </Animated.View>
     )
 }
 

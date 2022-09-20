@@ -1,15 +1,21 @@
-import React       from 'react';
-import { styles }  from '../../style';
+import React, { useState }   from 'react';
+import { fadeIn }            from '../../helpers';
+import { styles }            from '../../style';
 import { 
     View, 
     Text, 
-}                  from 'react-native';
-import LeftSide    from './leftSide';
-import RightSide   from './rightSide';
+    Animated, 
+}                            from 'react-native';
+import LeftSide              from './leftSide';
+import RightSide             from './rightSide';
 
 const MainScreen = ({ forecast }) => {
+    const opacity = useState(new Animated.Value(0)) [0];
+
+    fadeIn(opacity);
+
     return (
-        <View style={styles.current}>
+        <Animated.View style={[{opacity}]}>
             <View style={styles.currentWrapper}>
                 <LeftSide forecast={forecast}/>
                 <RightSide forecast={forecast}/>
@@ -17,7 +23,7 @@ const MainScreen = ({ forecast }) => {
             <Text style={styles.currentDescription}>
                 {forecast.current.weather[0].description}
             </Text>
-        </View>
+        </Animated.View>
     )
 }
 
