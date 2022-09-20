@@ -62,7 +62,7 @@ export const iconChoser = (weatherId, isMainIcon, isEight) => {
         case 314:
         case 321:
             return isMainIcon 
-                ? require('../assets/stickers/soCold.png') 
+                ? require('../assets/stickers/wet.png') 
                 : isEight 
                     ? require('../assets/weatherIcons/Drizzle/drizzle80.png') 
                     : require('../assets/weatherIcons/Drizzle/drizzle.png');
@@ -76,13 +76,13 @@ export const iconChoser = (weatherId, isMainIcon, isEight) => {
         case 522:
         case 531:
             return isMainIcon 
-                ? require('../assets/stickers/soCold.png') 
+                ? require('../assets/stickers/wet.png') 
                 : isEight 
                     ? require('../assets/weatherIcons/Rain/rain80.png') 
                     : require('../assets/weatherIcons/Rain/rain.png');
         case 511:
             return isMainIcon 
-                ? require('../assets/stickers/soCold.png') 
+                ? require('../assets/stickers/wet.png') 
                 : isEight 
                     ? require('../assets/weatherIcons/Rain/snowRain80.png') 
                     : require('../assets/weatherIcons/Rain/snowRain.png');
@@ -98,7 +98,7 @@ export const iconChoser = (weatherId, isMainIcon, isEight) => {
         case 621:
         case 622:
             return isMainIcon 
-                ? require('../assets/stickers/soCold.png') 
+                ? require('../assets/stickers/hat.png') 
                 : isEight 
                     ? require('../assets/weatherIcons/Snow/snow80.png') 
                     : require('../assets/weatherIcons/Snow/snow.png');
@@ -111,13 +111,13 @@ export const iconChoser = (weatherId, isMainIcon, isEight) => {
         case 762:
         case 771:
             return isMainIcon 
-                ? require('../assets/stickers/soCold.png') 
+                ? require('../assets/stickers/high.png') 
                 : isEight 
                     ? require('../assets/weatherIcons/Atmosphere/nebula80.png') 
                     : require('../assets/weatherIcons/Atmosphere/nebula.png');
         case 781:
             return isMainIcon 
-                ? require('../assets/stickers/soCold.png') 
+                ? require('../assets/stickers/high.png') 
                 : isEight 
                     ? require('../assets/weatherIcons/Atmosphere/tornado80.png') 
                     : require('../assets/weatherIcons/Atmosphere/tornado.png');
