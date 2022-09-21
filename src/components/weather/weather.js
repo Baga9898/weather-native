@@ -2,9 +2,10 @@ import React, {useState, useEffect}   from 'react';
 import { LinearGradient }             from 'expo-linear-gradient';
 import { loadForecast }               from '../../helpers';
 import { 
-    ActivityIndicator, 
+    ActivityIndicator,
     ScrollView, 
     RefreshControl, 
+    Text,
 }                                     from 'react-native';
 import MainScreen                     from '../mainScreen/mainScreen';
 import Hourly                         from '../hourly/hourly';
@@ -32,6 +33,7 @@ const Weather = () => {
                 }}
             >
                 <ActivityIndicator size='large' />
+                <Text style={{ color: '#fff', marginTop: 20 }}>ПогодОчка загружается...</Text>
             </LinearGradient>
         );
     }
