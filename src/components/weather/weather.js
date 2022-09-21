@@ -33,7 +33,7 @@ const Weather = () => {
                 }}
             >
                 <ActivityIndicator size='large' />
-                <Text style={{ color: '#fff', marginTop: 20 }}>ПогодОчка загружается...</Text>
+                <Text style={{ color: '#fff', marginTop: 20, fontWeight: '600', }}>ПогодОчка загружается...</Text>
             </LinearGradient>
         );
     }
