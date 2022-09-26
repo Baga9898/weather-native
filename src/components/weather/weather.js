@@ -1,6 +1,7 @@
 import React, {useState, useEffect}   from 'react';
 import { LinearGradient }             from 'expo-linear-gradient';
 import { loadForecast }               from '../../helpers';
+import { StatusBar }                  from 'expo-status-bar';
 import { 
     ActivityIndicator,
     ScrollView, 
@@ -59,6 +60,7 @@ const Weather = () => {
             <Daily forecast={forecast}/>
             <ExtraInfo forecast={forecast}/>
         </ScrollView>
+        <StatusBar style='auto'/>
     </LinearGradient>
   )
 }
