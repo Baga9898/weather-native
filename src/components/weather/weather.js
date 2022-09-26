@@ -46,7 +46,7 @@ const Weather = () => {
         style={{ flex: 1 }}
     >
         <ScrollView 
-            style={{marginTop: 50}}
+            style={{marginTop: 30}}
             refreshControl={
                 <RefreshControl 
                     refreshing={refreshing} 
