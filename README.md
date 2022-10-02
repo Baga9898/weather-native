@@ -1,7 +1,7 @@
 # POGODOCHKA
-![](https://img.shields.io/badge/React-18.0.0-blue)
-![](https://img.shields.io/badge/React--native-0.69.6-blue)
-![](https://img.shields.io/badge/Expo-46.0.9-blue)
+![](https://img.shields.io/badge/react-18.0.0-blue)
+![](https://img.shields.io/badge/react--native-0.69.6-blue)
+![](https://img.shields.io/badge/expo-46.0.9-blue)
 ![](https://img.shields.io/badge/expo--linear--gradient-11.4.0-blue)
 ![](https://img.shields.io/badge/expo--location-14.3.0-blue)
 ![](https://img.shields.io/badge/expo--status--bar-1.4.0-blue)
