@@ -2,8 +2,6 @@
 
 Mobile forecast application written in React-native with Expo
 
-</br>
-
 ## Features
 ---
 - Native app with weather forecast
@@ -12,8 +10,6 @@ Mobile forecast application written in React-native with Expo
 - There is also UV index
 - Hourly and daily weather forecast
 - A block of additional information, including the time of sunrise & sunset, humidity level, dew point, wind speed, atmospheric pressure level
-
-</br>
 
 ## Getting started
 ---
@@ -29,15 +25,11 @@ Mobile forecast application written in React-native with Expo
 ### Start development server
     npm start
 
-</br>
-
 ## Launching an app on your phone for development
 ---
 - After the server has been started successfully, a QR code will appear in the terminal
 - Launch the Expo Go app on your phone and scan the QR from the terminal, also, it's easier to do it through your phone's camera app by pointing at the QR, after which a recommendation will appear to open the Expo Go app
 - To retry the launch, the application will already remember what you opened earlier and will offer it to the selection
-
-</br>
 
 ## Build APK or IPA 
 ---
@@ -50,8 +42,6 @@ Mobile forecast application written in React-native with Expo
     eas build --p android --profile androidView
 
 - If the terminal offers to create a new key, agree by pressing y
-
-</br>
 
 ## Downloads
 ---
