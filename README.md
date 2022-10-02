@@ -2,6 +2,8 @@
 
 Mobile forecast application written in React-native with Expo
 
+</br>
+
 ## Features
 ---
 - Native app with weather forecast
@@ -10,6 +12,8 @@ Mobile forecast application written in React-native with Expo
 - There is also UV index
 - Hourly and daily weather forecast
 - A block of additional information, including the time of sunrise & sunset, humidity level, dew point, wind speed, atmospheric pressure level
+
+</br>
 
 ## Getting started
 ---
@@ -25,14 +29,38 @@ Mobile forecast application written in React-native with Expo
 ### Start development server
     npm start
 
+</br>
+
 ## Launching an app on your phone for development
 ---
 - After the server has been started successfully, a QR code will appear in the terminal
 - Launch the Expo Go app on your phone and scan the QR from the terminal, also, it's easier to do it through your phone's camera app by pointing at the QR, after which a recommendation will appear to open the Expo Go app
 - To retry the launch, the application will already remember what you opened earlier and will offer it to the selection
 
+</br>
+
+## Build APK or IPA 
+---
+>First of all, you need to install eas-cli and log in in eas
+
+    npm install -g eas-cli
+
+    eas login
+### Create APK
+    eas build --p android --profile androidView
+
+- If the terminal offers to create a new key, agree by pressing y
+
+</br>
+
 ## Downloads
 ---
-You can also download the APK file for Android and the IPA file for iOS
+You can also download the APK file for Android
 
-[Android APK](./downloads/application-325b36c8-1182-41f3-bce6-4652c196a386.apk "download")
+- Just click on the APK link below and press on the download button on the page that opens
+
+- [Android APK](./downloads/PogodOCHKA.apk)
+  
+</br>
+Do good</br>
+=)=)
