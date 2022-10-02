@@ -6,7 +6,9 @@
 ![](https://img.shields.io/badge/expo--location-14.3.0-blue)
 ![](https://img.shields.io/badge/expo--status--bar-1.4.0-blue)
 </br>
-Mobile forecast application written in React-native with Expo
+</br>
+Mobile forecast application written in React-native with Expo.</br>
+The main feature of the application are funny stickers that change from the weather.
 
 ## Features
 
@@ -21,9 +23,9 @@ Mobile forecast application written in React-native with Expo
 
 ### System requirements
 >:warning: Before you, make sure you have all the below installed:
->- [The installed Expo Go app on your mobile phone](https://expo.dev/client)
->- [Node.js v16 or above](https://nodejs.org/en/)
->- [Git](https://git-scm.com/)
+- [The installed Expo Go app on your mobile phone](https://expo.dev/client)
+- [Node.js v16 or above](https://nodejs.org/en/)
+- [Git](https://git-scm.com/)
   
 ### Initializing packages
     npm install
@@ -37,14 +39,14 @@ Mobile forecast application written in React-native with Expo
 - Launch the Expo Go app on your phone and scan the QR from the terminal, also, it's easier to do it through your phone's camera app by pointing at the QR, after which a recommendation will appear to open the Expo Go app
 - To retry the launch, the application will already remember what you opened earlier and will offer it to the selection
 
-## Build APK or IPA 
+## Build APK
 
 >First of all, you need to install eas-cli and log in in eas
 
     npm install -g eas-cli
 
     eas login
-### Create APK
+
     eas build --p android --profile androidView
 
 - If the terminal offers to create a new key, agree by pressing y
