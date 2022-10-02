@@ -3,10 +3,12 @@ import { LinearGradient }             from 'expo-linear-gradient';
 import { loadForecast }               from '../../helpers';
 import { StatusBar }                  from 'expo-status-bar';
 import { 
-    ActivityIndicator,
     ScrollView, 
     RefreshControl, 
     Text,
+    Animated,
+    Easing,
+    View,
 }                                     from 'react-native';
 import MainScreen                     from '../mainScreen/mainScreen';
 import Hourly                         from '../hourly/hourly';
@@ -21,6 +23,25 @@ const Weather = () => {
         loadForecast(setRefreshing, setForecast);
     }, []);
 
+    const rotate = () => {
+        rotateValue.setValue(0);
+        Animated.timing(rotateValue, {
+            toValue: 1,
+            duration: 2000,
+            easing: Easing.linear,
+            useNativeDriver: false,
+        }).start(() => rotate());
+    }
+
+    let rotateValue = new Animated.Value(0);
+
+    const RotateData = rotateValue.interpolate({
+        inputRange: [0, 1],
+        outputRange: ['0deg', '360deg'],
+    });
+
+    rotate();
+
     if (!forecast) {
         return (
             <LinearGradient
@@ -33,8 +54,13 @@ const Weather = () => {
                     alignItems: 'center',
                 }}
             >
-                <ActivityIndicator size='large' />
-                <Text style={{ color: '#fff', marginTop: 20, fontWeight: '600', }}>ПогодОчка загружается...</Text>
+                <View >
+                    <Animated.Image 
+                        style={{height: 250, width: 180, transform: [{rotate: RotateData}]}} 
+                        source={require('../../../assets/stickers/hat.png')} 
+                    />
+                    <Text style={{ color: '#fff', marginTop: 20, fontWeight: '600', }}>ПогодОчка загружается...</Text>
+                </View>
             </LinearGradient>
         );
     }
