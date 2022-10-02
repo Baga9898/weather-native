@@ -35,4 +35,4 @@ Mobile forecast application written in React-native with Expo
 ---
 You can also download the APK file for Android and the IPA file for iOS
 
-[Android APK](./downloads/application-325b36c8-1182-41f3-bce6-4652c196a386.apk)
+[Android APK](https://github.com/Baga9898/weather-native/blob/main/downloads/application-325b36c8-1182-41f3-bce6-4652c196a386.apk)
