@@ -59,7 +59,7 @@ const Weather = () => {
                         style={{height: 250, width: 180, transform: [{rotate: RotateData}]}} 
                         source={require('../../../assets/stickers/hat.png')} 
                     />
-                    <Text style={{ color: '#fff', marginTop: 20, fontWeight: '600', }}>ПогодОчка загружается...</Text>
+                    <Text style={{ color: '#fff', marginTop: 20, fontWeight: '600', }}>ПогодОЧКА загружается...</Text>
                 </View>
             </LinearGradient>
         );
