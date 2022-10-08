@@ -55,9 +55,7 @@ The main feature of the application are funny stickers that change from the weat
 
 You can also download the APK file for Android
 
-- Just click on the APK link below and press on the download button on the page that opens
-
-- [Android APK](./downloads/PogodOCHKA.apk)
+Just click on the release version in the releases tab and download the desired version
   
 </br>
 Do good</br>
